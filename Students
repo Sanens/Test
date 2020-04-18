@@ -1,0 +1,56 @@
+#include<iostream>
+using namespace std;
+#include<iomanip>
+typedef struct{
+	int number;
+	string name;
+	double score1;
+	double score2;
+	double score3;
+	
+}student;
+
+typedef struct{
+	student *elem;
+	int length; 
+}List;
+
+void Init(List &L)
+{
+	L.elem=new student[100];
+	L.length=0;
+}
+
+void Creat(List&L,int n)
+{
+	for(int i=0;i<n;i++)
+	{
+		cin>>L.elem[i].number;
+		cin>>L.elem[i].name;
+		cin>>L.elem[i].score1;
+		cin>>L.elem[i].score2;
+		cin>>L.elem[i].score3;
+		L.length++;
+	}
+}
+
+void Output(List L)
+{
+	for(int i=0;i<L.length;i++)
+	{
+		cout<<L.elem[i].number<<" "<<L.elem[i].name<<" "<<setiosflags(ios::fixed) <<setprecision(2)<<L.elem[i].score1<<" "<<L.elem[i].score2<<" "<<L.elem[i].score3<<endl;
+	}
+	
+}
+int main()
+{
+	int n;
+	cin>>n;
+	List L;
+	Init(L);
+	Creat(L,n);
+	Output(L);
+	return 0;
+}
+
+
