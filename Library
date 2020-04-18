@@ -40,10 +40,10 @@ int Insert(List &L,int i,Book e)
 int Delete(List&L,int i)
 {//删除 
 	if(i<1||i>L.length)  return ERROR;
-	if(L.length==0)    return ERROR;
-	for(int j=i;i<L.length;i++)
+	//if(L.length==0)    return ERROR;
+	for(int j=i;j<=L.length-1;j++)
 	L.elem[j-1]=L.elem[j];
-	L.length--;
+	--L.length;
 	return OK;
 }
 
@@ -61,6 +61,11 @@ int GetBook(List L,int i,Book &e)
 	e=L.elem[i-1];
 	return OK;	
 }
+
+int Length(List L)
+{
+	return L.length;
+ } 
 
 int main()
 {
@@ -80,7 +85,7 @@ int main()
 	choose=-1;
 	while(choose!=0)
 	{
-		cout<<"请选择操作："<<'\n' ;
+		cout<<"请选择操作：" ;
 		cin>>choose;
 		switch(choose)
 		{
@@ -90,7 +95,9 @@ int main()
 				else 
 					cout<<"创建顺序表失败！\n\n";
 					 break;
-			case 2:{
+			case 2:{//case后面加{}，因为i的的使用包含整个switch代码块
+			//在case后面变量的代码用大括号括起来，构成代码块，超出该代码块后，该变量失效； 
+			//i就是只属于case2里面的变量。 
 				L.elem=new Book[MAXSIZE];
 				if(!L.elem) exit(OVERFLOW);
 				L.length=0;
@@ -99,7 +106,7 @@ int main()
 				file.open("book.txt");
 				if(!file)
 				{
-					cout<<"未找到文件！\n";
+					cout<<"未找到文件！\n"; 
 					exit(OVERFLOW);
 				}
 				file>>head_1>> head_2>>head_3;
@@ -162,7 +169,11 @@ int main()
 						<< setw(50) << L.elem[i].name << "\t" << left
 						<< setw(5) << L.elem[i].price << endl;
 			cout << endl;
-			break;				
+			break;	
+			case 8:
+				cout<<"当前图书馆藏书为：";
+				cout<<Length(L)<<'\n';	
+			break;		
 		}
 	}
 	return 0;
